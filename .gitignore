@@ -1,0 +1,45 @@
+# Dependencias de Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Archivos de entorno
+.env
+.env.local
+.env.*.local
+
+# Archivos de logs
+logs/
+*.log
+logs/*.log
+debug.log
+error.log
+
+# Cachés y archivos temporales
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+*.tmp
+*.pid
+*.seed
+*.pid.lock
+coverage/
+
+# Salida de compiladores (por ejemplo, TypeScript)
+dist/
+build/
+
+# Archivos relacionados con Docker
+docker-compose.override.yml
+.docker/
+
+# Archivos relacionados con el sistema operativo
+Thumbs.db
+desktop.ini
+
+# Otros
+*.tgz
