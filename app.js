@@ -1,41 +1,48 @@
+// === Instancias ===
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// Rutas importadas
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
 
-// view engine setup
+// === Configuraciones ===
+// Configuración del motor de vistas
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// === Middleware ===
+app.use(logger('dev')); // Logger para registrar solicitudes
+app.use(express.json()); // Analizador JSON para el cuerpo de las solicitudes
+app.use(express.urlencoded({ extended: false })); // Analizador de URL codificadas
+app.use(cookieParser()); // Analizador de cookies
+app.use(express.static(path.join(__dirname, 'public'))); // Middleware para archivos estáticos
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// === Rutas ===
+app.use('/', indexRouter); // Ruta principal
+app.use('/users', usersRouter); // Ruta para usuarios
 
-// catch 404 and forward to error handler
+// === Manejadores de errores ===
+// Captura errores 404 y los pasa al manejador de errores
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+// Manejador de errores
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
+  // Configura las variables locales, solo proporcionando error en desarrollo
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // Renderiza la página de error
   res.status(err.status || 500);
   res.render('error');
 });
 
-module.exports = app;
+// === Arranque del servidor o exportación del servidor ===
+module.exports = app; // Exporta la aplicación para que `bin/www` o cualquier otro archivo pueda usarla
